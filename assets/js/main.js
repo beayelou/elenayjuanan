@@ -1,3 +1,12 @@
+/* Always open the page at the top, even on reload (browsers otherwise
+   restore the previous scroll position and land mid-page). */
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.addEventListener('load', () => {
+  if (!location.hash) window.scrollTo(0, 0);
+});
+
 /* Hero background video — coax mobile browsers into autoplaying.
    iOS Safari / Android need muted+playsinline AND, when autoplay is
    blocked, a nudge on the first user interaction. */
@@ -20,15 +29,12 @@ if (heroVideo) {
   heroVideo.addEventListener('canplay', playVideo, { once: true });
 
   // Fallback: start playback on the first interaction if autoplay was blocked.
+  const interactions = ['touchstart', 'touchend', 'pointerdown', 'click', 'scroll', 'keydown'];
   const resume = () => {
     playVideo();
-    ['touchstart', 'pointerdown', 'click', 'scroll'].forEach((ev) =>
-      window.removeEventListener(ev, resume)
-    );
+    interactions.forEach((ev) => window.removeEventListener(ev, resume));
   };
-  ['touchstart', 'pointerdown', 'click', 'scroll'].forEach((ev) =>
-    window.addEventListener(ev, resume, { passive: true })
-  );
+  interactions.forEach((ev) => window.addEventListener(ev, resume, { passive: true }));
 
   // Resume when the tab/app becomes visible again.
   document.addEventListener('visibilitychange', () => {
