@@ -168,9 +168,8 @@ a { color: inherit; text-decoration: none; }
 .hero .scroll-cue { position: relative; z-index: 2; }
 
 .hero-frame {
-  border: 1px solid var(--line-light);
-  padding: clamp(2.4rem, 6vw, 4.5rem) clamp(1.6rem, 6vw, 5rem);
-  max-width: 860px;
+  padding: clamp(1rem, 4vw, 2rem);
+  max-width: 900px;
   width: 100%;
   animation: fade-up 1s ease both;
 }
@@ -279,54 +278,67 @@ a { color: inherit; text-decoration: none; }
 .story-body h3 { font-size: 1.4rem; color: var(--burgundy); margin-bottom: 0.4rem; }
 .story-body p { color: var(--ink-soft); max-width: 52ch; }
 
-/* ---------- Timeline ---------- */
+/* ---------- Timeline (centered, alternating) ---------- */
 .timeline {
   list-style: none;
   margin: 0 auto;
   padding: 0;
-  max-width: 640px;
+  max-width: 880px;
   position: relative;
 }
 .timeline::before {
   content: "";
   position: absolute;
-  left: 5.6rem;
+  left: 50%;
   top: 0.6rem; bottom: 0.6rem;
   width: 1px;
   background: var(--line-light);
+  transform: translateX(-50%);
 }
 .tl-item {
-  display: grid;
-  grid-template-columns: 4.6rem 1.4rem 1fr;
-  align-items: start;
-  gap: 1rem;
-  padding: 1.15rem 0;
+  position: relative;
+  width: 50%;
+  box-sizing: border-box;
+  padding: 1.2rem 3rem 1.2rem 0;
+  min-height: 3.4rem;
 }
+.tl-item:nth-child(odd) {
+  left: 0;
+  text-align: right;
+}
+.tl-item:nth-child(even) {
+  left: 50%;
+  text-align: left;
+  padding: 1.2rem 0 1.2rem 3rem;
+}
+.tl-content { display: block; }
 .tl-time {
+  display: block;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   color: var(--cream);
   font-variant-numeric: tabular-nums;
-  text-align: right;
-  line-height: 1.4;
+  line-height: 1;
+  margin-bottom: 0.35rem;
 }
 .tl-node {
-  position: relative;
-  width: 11px; height: 11px;
-  margin-top: 0.85rem;
-  justify-self: center;
+  position: absolute;
+  top: 1.55rem;
+  width: 13px; height: 13px;
   border-radius: 50%;
   background: var(--cream);
-  box-shadow: 0 0 0 4px rgba(244, 239, 226, 0.12);
+  box-shadow: 0 0 0 5px rgba(244, 239, 226, 0.12);
 }
+.tl-item:nth-child(odd) .tl-node { right: -6.5px; }
+.tl-item:nth-child(even) .tl-node { left: -6.5px; }
 .tl-body h3 {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: var(--cream);
   font-weight: 500;
   margin-bottom: 0.15rem;
 }
-.tl-body p { color: rgba(244, 239, 226, 0.7); font-size: 1rem; }
+.tl-body p { color: rgba(244, 239, 226, 0.72); font-size: 0.98rem; }
 
 /* ---------- Button ---------- */
 .btn {
@@ -472,10 +484,23 @@ a { color: inherit; text-decoration: none; }
   .cards { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 680px) {
+  /* Timeline collapses to a single left-aligned spine */
+  .timeline::before { left: 7px; transform: none; }
+  .tl-item,
+  .tl-item:nth-child(odd),
+  .tl-item:nth-child(even) {
+    width: 100%;
+    left: 0;
+    text-align: left;
+    padding: 1rem 0 1rem 2.4rem;
+  }
+  .tl-item:nth-child(odd) .tl-node,
+  .tl-item:nth-child(even) .tl-node { left: 0.5px; right: auto; }
+  .tl-time { font-size: 1.5rem; }
+}
+
 @media (max-width: 560px) {
   .story-item { grid-template-columns: 1fr; gap: 0.4rem; }
   .story-year { font-size: 1.5rem; }
-  .timeline::before { left: 4.4rem; }
-  .tl-item { grid-template-columns: 3.6rem 1.2rem 1fr; gap: 0.75rem; }
-  .tl-time { font-size: 1.2rem; }
 }
