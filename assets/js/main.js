@@ -39,16 +39,25 @@ if (heroVideo) {
 const navToggle = document.getElementById('navToggle');
 const siteNav = document.getElementById('siteNav');
 
-navToggle.addEventListener('click', () => {
-  const isOpen = siteNav.classList.toggle('is-open');
+const setNav = (isOpen) => {
+  siteNav.classList.toggle('is-open', isOpen);
+  navToggle.classList.toggle('is-open', isOpen);
+  document.body.classList.toggle('nav-open', isOpen);
   navToggle.setAttribute('aria-expanded', String(isOpen));
+  navToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
+};
+
+navToggle.addEventListener('click', () => {
+  setNav(!siteNav.classList.contains('is-open'));
 });
 
 siteNav.querySelectorAll('a').forEach((link) => {
-  link.addEventListener('click', () => {
-    siteNav.classList.remove('is-open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', () => setNav(false));
+});
+
+// Close the menu with the Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && siteNav.classList.contains('is-open')) setNav(false);
 });
 
 /* Reveal sections on scroll — opt-in so no-JS keeps everything visible */
