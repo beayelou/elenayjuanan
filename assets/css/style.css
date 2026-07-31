@@ -40,6 +40,13 @@ a { color: inherit; text-decoration: none; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
+  .hero-video { display: none; }
+  .hero {
+    background:
+      linear-gradient(rgba(30, 34, 18, 0.5), rgba(30, 34, 18, 0.6)),
+      url("../img/hero-poster.jpg") center / cover no-repeat,
+      var(--olive-deep);
+  }
 }
 
 /* ---------- Shared bits ---------- */
@@ -135,7 +142,30 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
   padding: 7rem 1.6rem 4rem;
   position: relative;
+  overflow: hidden;
 }
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  filter: grayscale(1) contrast(1.02);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(30, 34, 18, 0.55), rgba(30, 34, 18, 0.35) 45%, rgba(30, 34, 18, 0.72)),
+    radial-gradient(120% 90% at 50% 8%, rgba(106, 27, 45, 0.28), transparent 62%);
+}
+
+.hero-frame,
+.hero .scroll-cue { position: relative; z-index: 2; }
 
 .hero-frame {
   border: 1px solid var(--line-light);
