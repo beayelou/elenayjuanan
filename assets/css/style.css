@@ -279,12 +279,27 @@ a { color: inherit; text-decoration: none; }
 .story-body p { color: var(--ink-soft); max-width: 52ch; }
 
 /* ---------- Timeline (centered, alternating) ---------- */
+.timeline-wrap { position: relative; }
+.timeline-wrap::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 78%);
+  aspect-ratio: 1104 / 728;
+  background: url("../img/caseria-beige.png") center / contain no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
 .timeline {
   list-style: none;
   margin: 0 auto;
   padding: 0;
   max-width: 880px;
   position: relative;
+  z-index: 1;
 }
 .timeline::before {
   content: "";
@@ -365,8 +380,58 @@ a { color: inherit; text-decoration: none; }
   font-style: normal;
 }
 
+/* ---------- Scroll invite (confirmación → historia) ---------- */
+.scroll-invite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3.6rem;
+  color: var(--olive);
+  animation: invite-float 3.2s ease-in-out infinite;
+}
+.scroll-invite-text {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  color: var(--olive);
+}
+.scroll-chevron {
+  width: 13px;
+  height: 13px;
+  border-right: 2px solid var(--burgundy);
+  border-bottom: 2px solid var(--burgundy);
+  transform: rotate(45deg);
+  animation: chevron-bounce 1.8s ease-in-out infinite;
+}
+.scroll-invite:hover .scroll-chevron { border-color: var(--terracotta, var(--burgundy)); }
+
+@keyframes invite-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+@keyframes chevron-bounce {
+  0%, 100% { transform: translateY(0) rotate(45deg); opacity: 0.45; }
+  50%      { transform: translateY(7px) rotate(45deg); opacity: 1; }
+}
+
 /* ---------- Regalo ---------- */
-.sprig { display: inline-block; color: rgba(244, 239, 226, 0.7); margin-bottom: 1.4rem; }
+#regalo { position: relative; overflow: hidden; }
+#regalo::before,
+#regalo::after {
+  content: "";
+  position: absolute;
+  width: min(460px, 55%);
+  aspect-ratio: 1100 / 677;
+  background: url("../img/olive-cutout.png") center / contain no-repeat;
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+#regalo::before { top: -3%; left: -6%; transform: rotate(6deg); }
+#regalo::after  { bottom: -4%; right: -6%; transform: scaleX(-1) rotate(6deg); }
+#regalo .wrap { position: relative; z-index: 1; }
 .band--olive .band-lead--light { margin-top: 1.2rem; }
 .account {
   margin-top: 2rem;
@@ -381,11 +446,32 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- Recomendaciones ---------- */
-.reco-quip { font-style: italic; color: var(--burgundy); }
+.reco-layout {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: center;
+}
+.reco-collage {
+  margin: 0;
+}
+.reco-collage img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.reco-collage figcaption {
+  margin-top: 0.8rem;
+  font-family: var(--sans);
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+  text-align: center;
+}
 .cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.4rem;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
 }
 .card {
   background: var(--cream-deep);
@@ -481,7 +567,8 @@ a { color: inherit; text-decoration: none; }
     transition: transform 0.35s ease;
   }
   .site-nav.is-open { transform: translateY(0); }
-  .cards { grid-template-columns: 1fr; }
+  .reco-layout { grid-template-columns: 1fr; }
+  .reco-collage { max-width: 520px; margin: 0 auto; }
 }
 
 @media (max-width: 680px) {

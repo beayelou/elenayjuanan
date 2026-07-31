@@ -18,9 +18,9 @@
     <span></span><span></span><span></span>
   </button>
   <nav class="site-nav" id="siteNav">
+    <a href="#confirmacion">Confirmación</a>
     <a href="#historia">Historia</a>
     <a href="#dia">El día</a>
-    <a href="#confirmacion">Confirmación</a>
     <a href="#regalo">Regalo</a>
     <a href="#recomendaciones">Jaén</a>
     <a href="#contacto">Contacto</a>
@@ -49,9 +49,25 @@
         <span>Casería de las Palmeras, Jaén</span>
       </p>
     </div>
-    <a href="#historia" class="scroll-cue" aria-label="Bajar">
+    <a href="#confirmacion" class="scroll-cue" aria-label="Bajar">
       <span class="scroll-line"></span>
     </a>
+  </section>
+
+  <!-- CONFIRMACIÓN -->
+  <section class="band band--cream band--center" id="confirmacion">
+    <div class="wrap wrap--narrow">
+      <p class="eyebrow">Confirmación</p>
+      <h2 class="band-title">¿Vienes a celebrarlo?</h2>
+      <p class="band-lead">Cuéntanos si podrás acompañarnos para organizarlo todo con tiempo. Solo te llevará un minuto rellenar el formulario.</p>
+      <a href="#" id="rsvpLink" class="btn" target="_blank" rel="noopener">Confirmar asistencia</a>
+      <p class="fineprint">Enlace del formulario: pendiente de añadir.</p>
+
+      <a href="#historia" class="scroll-invite" aria-label="Bajar a nuestra historia">
+        <span class="scroll-invite-text">Baja, que te contamos todos los detalles</span>
+        <span class="scroll-chevron" aria-hidden="true"></span>
+      </a>
+    </div>
   </section>
 
   <!-- HISTORIA -->
@@ -97,6 +113,7 @@
         <p class="band-lead band-lead--light">Casería de las Palmeras, Jaén. Este es el plan, minuto a minuto.</p>
       </header>
 
+      <div class="timeline-wrap">
       <ol class="timeline">
         <li class="tl-item">
           <div class="tl-content">
@@ -169,34 +186,13 @@
           <span class="tl-node" aria-hidden="true"></span>
         </li>
       </ol>
-    </div>
-  </section>
-
-  <!-- CONFIRMACIÓN -->
-  <section class="band band--cream band--center" id="confirmacion">
-    <div class="wrap wrap--narrow">
-      <p class="eyebrow">Confirmación</p>
-      <h2 class="band-title">¿Vienes a celebrarlo?</h2>
-      <p class="band-lead">Cuéntanos si podrás acompañarnos para organizarlo todo con tiempo. Solo te llevará un minuto rellenar el formulario.</p>
-      <a href="#" id="rsvpLink" class="btn" target="_blank" rel="noopener">Confirmar asistencia</a>
-      <p class="fineprint">Enlace del formulario: pendiente de añadir.</p>
+      </div>
     </div>
   </section>
 
   <!-- REGALO -->
   <section class="band band--olive" id="regalo">
     <div class="wrap wrap--narrow band--center">
-      <span class="sprig" aria-hidden="true">
-        <svg viewBox="0 0 120 40" width="120" height="40">
-          <path d="M10 20 H110" fill="none" stroke="currentColor" stroke-width="1"/>
-          <g fill="currentColor">
-            <ellipse cx="35" cy="13" rx="7" ry="3" transform="rotate(-25 35 13)"/>
-            <ellipse cx="52" cy="27" rx="7" ry="3" transform="rotate(25 52 27)"/>
-            <ellipse cx="68" cy="13" rx="7" ry="3" transform="rotate(-25 68 13)"/>
-            <ellipse cx="85" cy="27" rx="7" ry="3" transform="rotate(25 85 27)"/>
-          </g>
-        </svg>
-      </span>
       <p class="eyebrow eyebrow--light">Vuestro regalo</p>
       <h2 class="band-title band-title--light">Una cervecita juntos</h2>
       <p class="band-lead band-lead--light">Lo más importante para nosotros es poder celebrar y tomarnos una cervecita con vosotros. Vuestra compañía ya es el mejor regalo.</p>
@@ -211,22 +207,29 @@
       <header class="band-head">
         <p class="eyebrow">Jaén (y alrededores)</p>
         <h2 class="band-title">Recomendaciones</h2>
-        <p class="band-lead reco-quip">«Cateto tú, que no'ntiendé l'andalúh.» Vamos completando la lista, pero de momento:</p>
+        <p class="band-lead">Vamos completando la lista con nuestros rincones favoritos. De momento, para ir abriendo boca:</p>
       </header>
 
-      <div class="cards">
-        <article class="card">
-          <h3>¿Dónde duermo?</h3>
-          <p>Muy pronto añadiremos alojamientos cerca de la Casería para que no tengas que madrugar.</p>
-        </article>
-        <article class="card">
-          <h3>¿Un sitio para la cervecita?</h3>
-          <p>En Jaén seguro que no hay de ná, ¿o no? Iremos apuntando bares y rincones de confianza.</p>
-        </article>
-        <article class="card">
-          <h3>¿Qué ver por la zona?</h3>
-          <p>Ideas para hacer turismo antes o después de la boda. Catedral, olivares y algo más.</p>
-        </article>
+      <div class="reco-layout">
+        <figure class="reco-collage">
+          <img src="assets/img/recomendaciones.jpg" alt="Collage de Jaén: la catedral, una cerveza Alcázar, ramas de olivo, una flamenca y claveles" loading="lazy">
+          <figcaption>Collage de Elena · «Cateto tú, que no'ntiendé l'andalúh»</figcaption>
+        </figure>
+
+        <div class="cards">
+          <article class="card">
+            <h3>¿Dónde duermo?</h3>
+            <p>Muy pronto añadiremos alojamientos cerca de la Casería para que no tengas que madrugar.</p>
+          </article>
+          <article class="card">
+            <h3>¿Un sitio para la cervecita?</h3>
+            <p>En Jaén seguro que no hay de ná, ¿o no? Iremos apuntando bares y rincones de confianza.</p>
+          </article>
+          <article class="card">
+            <h3>¿Qué ver por la zona?</h3>
+            <p>Ideas para hacer turismo antes o después de la boda. Catedral, olivares y algo más.</p>
+          </article>
+        </div>
       </div>
     </div>
   </section>
