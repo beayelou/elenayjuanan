@@ -67,21 +67,41 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* Collapsible recommendation cards — show a preview + "Ver más" toggle.
-   Only collapse cards that are actually long, so short ones stay open. */
+   Recomputed after fonts load and on resize so it works at every width. */
 const COLLAPSED_H = 190;
-document.querySelectorAll('.reco-cat').forEach((card) => {
-  const content = card.querySelector('.reco-content');
-  const btn = card.querySelector('.reco-toggle');
-  if (!content || !btn) return;
-  if (content.scrollHeight <= COLLAPSED_H + 60) return;   // short enough, leave it open
+function setupRecoCards() {
+  document.querySelectorAll('.reco-cat').forEach((card) => {
+    const content = card.querySelector('.reco-content');
+    const btn = card.querySelector('.reco-toggle');
+    if (!content || !btn) return;
 
-  card.classList.add('is-collapsible');
-  btn.addEventListener('click', () => {
-    const expanded = card.classList.toggle('is-expanded');
-    btn.setAttribute('aria-expanded', String(expanded));
-    btn.firstChild.textContent = expanded ? 'Ver menos ' : 'Ver más ';
-    content.style.maxHeight = expanded ? content.scrollHeight + 'px' : '';
+    // Reset to measure the natural, un-clamped height
+    card.classList.remove('is-collapsible', 'is-expanded');
+    content.style.maxHeight = '';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.firstChild.textContent = 'Ver más ';
+
+    if (content.scrollHeight > COLLAPSED_H + 24) {
+      card.classList.add('is-collapsible');
+      if (!btn.dataset.bound) {
+        btn.dataset.bound = '1';
+        btn.addEventListener('click', () => {
+          const expanded = card.classList.toggle('is-expanded');
+          btn.setAttribute('aria-expanded', String(expanded));
+          btn.firstChild.textContent = expanded ? 'Ver menos ' : 'Ver más ';
+          content.style.maxHeight = expanded ? content.scrollHeight + 'px' : '';
+        });
+      }
+    }
   });
+}
+setupRecoCards();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(setupRecoCards);
+window.addEventListener('load', setupRecoCards);
+let recoResizeTimer;
+window.addEventListener('resize', () => {
+  clearTimeout(recoResizeTimer);
+  recoResizeTimer = setTimeout(setupRecoCards, 200);
 });
 
 /* Reveal sections on scroll — opt-in so no-JS keeps everything visible */
