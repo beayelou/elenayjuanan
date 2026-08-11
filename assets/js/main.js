@@ -66,6 +66,24 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && siteNav.classList.contains('is-open')) setNav(false);
 });
 
+/* Collapsible recommendation cards — show a preview + "Ver más" toggle.
+   Only collapse cards that are actually long, so short ones stay open. */
+const COLLAPSED_H = 190;
+document.querySelectorAll('.reco-cat').forEach((card) => {
+  const content = card.querySelector('.reco-content');
+  const btn = card.querySelector('.reco-toggle');
+  if (!content || !btn) return;
+  if (content.scrollHeight <= COLLAPSED_H + 60) return;   // short enough, leave it open
+
+  card.classList.add('is-collapsible');
+  btn.addEventListener('click', () => {
+    const expanded = card.classList.toggle('is-expanded');
+    btn.setAttribute('aria-expanded', String(expanded));
+    btn.firstChild.textContent = expanded ? 'Ver menos ' : 'Ver más ';
+    content.style.maxHeight = expanded ? content.scrollHeight + 'px' : '';
+  });
+});
+
 /* Reveal sections on scroll — opt-in so no-JS keeps everything visible */
 const revealables = document.querySelectorAll('.band');
 const staticMode = location.search.includes('static');

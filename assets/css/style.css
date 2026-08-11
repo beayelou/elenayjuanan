@@ -543,6 +543,51 @@ a { color: inherit; text-decoration: none; }
   color: var(--burgundy);
   margin-bottom: 1rem;
 }
+/* Collapsible content (progressive enhancement — JS adds .is-collapsible) */
+.reco-content { position: relative; }
+.reco-cat.is-collapsible .reco-content {
+  max-height: 190px;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.reco-cat.is-collapsible .reco-content::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 64px;
+  background: linear-gradient(to bottom, rgba(236, 227, 208, 0), var(--cream-deep));
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.reco-cat.is-collapsible.is-expanded .reco-content::after { opacity: 0; }
+.reco-toggle {
+  display: none;
+  margin-top: 1.1rem;
+  font-family: var(--sans);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--burgundy);
+  background: transparent;
+  border: 1px solid var(--burgundy);
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.reco-cat.is-collapsible .reco-toggle { display: inline-flex; align-items: center; gap: 0.4rem; }
+.reco-toggle::after {
+  content: "";
+  width: 6px; height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.reco-cat.is-expanded .reco-toggle::after { transform: rotate(-135deg); }
+.reco-toggle:hover { background: var(--burgundy); color: var(--cream); }
 .reco-sub {
   font-family: var(--sans);
   text-transform: uppercase;
