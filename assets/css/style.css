@@ -466,42 +466,131 @@ a { color: inherit; text-decoration: none; }
   padding: 0.7rem 1.6rem;
 }
 
-/* ---------- Recomendaciones ---------- */
-.reco-layout {
+/* ---------- Cómo llegar ---------- */
+.travel-grid {
   display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: clamp(1.6rem, 4vw, 3rem);
-  align-items: center;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
 }
+.travel-card {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1.8rem 1.6rem;
+}
+.travel-card h3 { font-size: 1.25rem; color: var(--burgundy); margin-bottom: 0.7rem; }
+.travel-card p { color: var(--ink-soft); font-size: 1rem; margin-top: 0.7rem; }
+.travel-card p:first-of-type { margin-top: 0; }
+.travel-tip {
+  font-style: italic;
+  color: var(--olive-deep);
+  border-left: 2px solid var(--olive-soft);
+  padding-left: 0.8rem;
+}
+.parking {
+  margin-top: 2.4rem;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1.8rem 1.6rem;
+}
+.parking h3 { font-size: 1.25rem; color: var(--burgundy); margin-bottom: 0.9rem; }
+.parking-list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem 1.6rem;
+}
+.parking-list li {
+  color: var(--ink-soft);
+  font-size: 1rem;
+  padding-left: 1.1rem;
+  position: relative;
+}
+.parking-list li::before {
+  content: "·";
+  position: absolute; left: 0.2rem;
+  color: var(--terracotta, var(--burgundy));
+  font-weight: 700;
+}
+.parking-list em, .reco-list em { font-style: italic; color: var(--olive-deep); }
+
+/* ---------- Recomendaciones ---------- */
 .reco-collage {
-  margin: 0;
+  margin: 0 auto 3rem;
+  max-width: 560px;
 }
 .reco-collage img {
   display: block;
   width: 100%;
   height: auto;
 }
-.reco-collage figcaption {
-  margin-top: 0.8rem;
-  font-family: var(--sans);
-  font-size: 0.76rem;
-  letter-spacing: 0.06em;
-  color: var(--ink-soft);
-  text-align: center;
-}
-.cards {
+.reco-cats {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+  align-items: start;
 }
-.card {
+.reco-cat {
   background: var(--cream-deep);
   border: 1px solid var(--line);
   border-radius: 6px;
-  padding: 2rem 1.8rem;
+  padding: 1.9rem 1.7rem;
 }
-.card h3 { font-size: 1.3rem; color: var(--burgundy); margin-bottom: 0.6rem; }
-.card p { color: var(--ink-soft); font-size: 1rem; }
+.reco-cat h3 {
+  font-size: 1.3rem;
+  color: var(--burgundy);
+  margin-bottom: 1rem;
+}
+.reco-sub {
+  font-family: var(--sans);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.72rem;
+  color: var(--olive);
+  margin: 1.4rem 0 0.6rem;
+}
+.reco-cat > .reco-sub:first-of-type { margin-top: 0; }
+.reco-note {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+.reco-list {
+  list-style: none;
+  margin: 0 0 0.4rem; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.reco-list li { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.45; }
+.reco-list--tight li { padding-left: 1.1rem; position: relative; }
+.reco-list--tight li::before {
+  content: "·";
+  position: absolute; left: 0.2rem;
+  color: var(--terracotta, var(--burgundy));
+  font-weight: 700;
+}
+.reco-name {
+  display: block;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 1.08rem;
+  color: var(--ink);
+}
+.reco-code {
+  font-family: var(--sans);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+  background: var(--champagne-light);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  color: var(--burgundy);
+  white-space: nowrap;
+}
 
 /* ---------- Contacto ---------- */
 .contacts {
@@ -594,8 +683,10 @@ a { color: inherit; text-decoration: none; }
   .site-nav.is-open { transform: translateY(0); }
   /* Lock background scroll while the menu is open */
   body.nav-open { overflow: hidden; }
-  .reco-layout { grid-template-columns: 1fr; }
-  .reco-collage { max-width: 520px; margin: 0 auto; }
+  .reco-cats { grid-template-columns: 1fr; }
+  .travel-grid { grid-template-columns: 1fr; }
+  .parking-list { grid-template-columns: 1fr; }
+  .reco-collage { max-width: 520px; }
 }
 
 @media (max-width: 680px) {
