@@ -121,3 +121,55 @@ if ('IntersectionObserver' in window && !staticMode && !window.matchMedia('(pref
     io.observe(el);
   });
 }
+
+/* Historia gallery — autoplay slideshow with dots and native swipe */
+(function () {
+  const viewport = document.getElementById('galleryViewport');
+  const dotsWrap = document.getElementById('galleryDots');
+  if (!viewport || !dotsWrap) return;
+  const slides = [...viewport.querySelectorAll('.gallery-slide')];
+  if (slides.length === 0) return;
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'gallery-dot' + (i === 0 ? ' is-active' : '');
+    d.type = 'button';
+    d.setAttribute('aria-label', 'Foto ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = [...dotsWrap.children];
+
+  function setActive(i) {
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    dots.forEach((d, j) => d.classList.toggle('is-active', j === current));
+  }
+  function go(i, smooth = true) {
+    current = (i + slides.length) % slides.length;
+    viewport.scrollTo({ left: viewport.clientWidth * current, behavior: (smooth && !reduce) ? 'smooth' : 'auto' });
+    setActive(current);
+  }
+
+  let st;
+  viewport.addEventListener('scroll', () => {
+    clearTimeout(st);
+    st = setTimeout(() => setActive(Math.round(viewport.scrollLeft / viewport.clientWidth)), 90);
+  }, { passive: true });
+
+  if (!reduce && slides.length > 1) {
+    let timer = setInterval(() => go(current + 1), 4200);
+    const pause = () => { clearInterval(timer); timer = null; };
+    const resume = () => { if (!timer) timer = setInterval(() => go(current + 1), 4200); };
+    ['pointerdown', 'touchstart', 'mouseenter'].forEach((ev) => viewport.addEventListener(ev, pause, { passive: true }));
+    ['pointerup', 'touchend', 'mouseleave'].forEach((ev) => viewport.addEventListener(ev, () => setTimeout(resume, 3500), { passive: true }));
+  }
+})();
+
+/* Photo strip — duplicate the images so the marquee loops seamlessly */
+(function () {
+  const track = document.getElementById('stripTrack');
+  if (!track) return;
+  [...track.children].forEach((img) => track.appendChild(img.cloneNode(true)));
+})();
