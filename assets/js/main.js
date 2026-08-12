@@ -167,9 +167,9 @@ if ('IntersectionObserver' in window && !staticMode && !window.matchMedia('(pref
   }
 })();
 
-/* Photo strip — duplicate the images so the marquee loops seamlessly */
+/* Photo strips — duplicate the images so each marquee loops seamlessly */
 (function () {
-  const track = document.getElementById('stripTrack');
-  if (!track) return;
-  [...track.children].forEach((img) => track.appendChild(img.cloneNode(true)));
+  document.querySelectorAll('.strip-track').forEach((track) => {
+    [...track.children].forEach((img) => track.appendChild(img.cloneNode(true)));
+  });
 })();

@@ -368,6 +368,7 @@ a { color: inherit; text-decoration: none; }
   flex: 0 0 auto;
 }
 .photo-strip:hover .strip-track { animation-play-state: paused; }
+.photo-strip--reverse .strip-track { animation-direction: reverse; }
 @keyframes strip-scroll {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
