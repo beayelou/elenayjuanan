@@ -52,6 +52,12 @@ a { color: inherit; text-decoration: none; }
   .photo-strip { overflow-x: auto; }
 }
 
+/* Snappier marquee on phones */
+@media (max-width: 680px) {
+  .strip-track { animation-duration: 20s; }
+  .strip-track img { height: 150px; }
+}
+
 /* ---------- Shared bits ---------- */
 .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 1.6rem; }
 .wrap--narrow { max-width: 720px; }
@@ -358,7 +364,7 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   gap: 6px;
   width: max-content;
-  animation: strip-scroll 60s linear infinite;
+  animation: strip-scroll 32s linear infinite;
 }
 .strip-track img {
   height: 190px;
